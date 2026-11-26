@@ -7,11 +7,13 @@ workflows:
       flutter: stable
       java: 17
     scripts:
-      - name: Ensure standard Android platform wrapper
+      - name: Generate standard Android wrapper files
         script: flutter create --platforms=android --org com.serein --project-name agent .
+      - name: Restore pinned Android Gradle configuration and remove duplicate launcher XML
+        script: bash tool/prepare_android.sh
       - name: Get Flutter packages
         script: flutter pub get
       - name: Build release APK using default Flutter engine
-        script: flutter build apk --release --dart-define=API_BASE_URL=$API_BASE_URL
+        script: flutter build apk --release --dart-define=API_BASE_URL="${API_BASE_URL}"
     artifacts:
       - build/app/outputs/flutter-apk/app-release.apk
