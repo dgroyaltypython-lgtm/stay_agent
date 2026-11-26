@@ -39,3 +39,7 @@ Do not use `localhost` or `127.0.0.1` in an APK running on a phone.
 
 ## Production caveats
 The starter API patch grants `AGENT` and `ADMIN` roles access to the booking list. The existing Booking model has no assigned-agent field, so this is not yet isolated per agent. Add assignment-based permissions before multiple independent agents use real guest data. Use HTTPS, `DEBUG=False`, strong secrets, token refresh and operational monitoring in production.
+
+
+## Gradle compatibility update
+This package uses Gradle 9.5.0 and Android Gradle Plugin 9.3.1, matching the current Flutter 3.50 Android toolchain defaults. It uses AGP built-in Kotlin rather than applying the legacy Kotlin Gradle plugin separately.
