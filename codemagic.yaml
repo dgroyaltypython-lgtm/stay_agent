@@ -1,0 +1,17 @@
+workflows:
+  serein-agent-android:
+    name: Serein Agent Android
+    max_build_duration: 60
+    instance_type: mac_mini_m2
+    environment:
+      flutter: stable
+      java: 17
+    scripts:
+      - name: Ensure standard Android platform wrapper
+        script: flutter create --platforms=android --org com.serein --project-name agent .
+      - name: Get Flutter packages
+        script: flutter pub get
+      - name: Build release APK using default Flutter engine
+        script: flutter build apk --release --dart-define=API_BASE_URL=$API_BASE_URL
+    artifacts:
+      - build/app/outputs/flutter-apk/app-release.apk
